@@ -7,5 +7,11 @@ Color redColor = new Color(0xFFDC4F64);
 TextStyle intrayTitleStyle = new TextStyle(
     fontFamily: "Avenir",
     fontWeight: FontWeight.bold,
-    color: Colors.black,
-    fontSize: 50);
+    color: darkGreyColor,
+    fontSize: 40);
+
+TextStyle darkTodoTitle = new TextStyle(
+    fontFamily: "Avenir",
+    fontWeight: FontWeight.bold,
+    color: darkGreyColor,
+    fontSize: 30);
