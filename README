@@ -6,3 +6,32 @@ App creation including:
 - Add new items
 - Move tasks in preferred order
 - Create new task screen
+
+User:
+- String userId
+- String apiKey
+- String firstName
+- String lastName
+- String email
+- String password
+
+SupportFile:
+- String text 
+
+Projects:
+- List<Task> tasks
+- List<SupportFile> SupportFiles
+- String projectld
+- String projectName
+- Date Deadline
+- Date reminder
+
+Task:
+- List<Task> tasks
+- String note
+- Date timeToComplete
+- bool completed
+- String repeats
+- Date Deadline
+- Date reminder
+- String taskId

@@ -10,7 +10,7 @@ class IntrayToDo extends StatelessWidget {
     return Container(
       key: Key(keyValue),
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      margin: EdgeInsets.only(bottom: 5, left: 10, right: 10),
       height: 100,
       decoration: BoxDecoration(
         color: redColor,
