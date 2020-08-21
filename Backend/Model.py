@@ -9,24 +9,23 @@ db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = 'users'
-    __table_args__ = tuple(db.UniqueConstraint('id', 'username', name='my_2uniq'))
+    # __table_args__ = tuple(db.UniqueConstraint('id', 'username', name='my_2uniq'))
 
-    id = db.Column(db.String(), primary_key=True, unique=True)
-    apiKey = db.Column(db.String(), primary_key=True, unique=True)
-    username = db.Column(db.String(), primary_key=True)
-    first_name = db.Column(db.String())
-    last_name = db.Column(db.String())
+    id = db.Column(db.Integer(), primary_key=True)
+    #api_key = db.Column(db.String())
+    username = db.Column(db.String(), unique=True)
+    firstname = db.Column(db.String())
+    lastname = db.Column(db.String())
     password = db.Column(db.String())
-    emailaddress = db.Column(db.String())
-    
-    def __init__(self, id, apiKey, username, first_name, last_name, password, emailaddress):
-        self.id = id
-        self.apiKey = apiKey
-        self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
+    email = db.Column(db.String())
+
+    def __init__(self, firstname, lastname, email, password, username):
+        #self.api_key = api_key
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
         self.password = password
-        self.emailaddress = emailaddress
+        self.username = username
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -34,10 +33,10 @@ class User(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'apiKey': self.apiKey,
             'username': self.username,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
             'password': self.password,
-            'emailaddress': self.emailaddress
+            'email': self.email,
+            #'api_key': self.api_key,
         }    

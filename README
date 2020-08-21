@@ -35,3 +35,20 @@ Task:
 - Date Deadline
 - Date reminder
 - String taskId
+
+Fucntion:
+- Login screen
+    - need to restrict app access for the unregisted account
+- create a popup for adding tasks
+- get data from the backend
+    - from json
+- add data to the backend
+    - to json
+- create classes for tasks etc    
+
+- backend
+    - classes for tasks 1
+        - create json method 1
+    - find out how to make an api apiKey
+    - create method prioritizing tasks
+    - how to safely store user data
