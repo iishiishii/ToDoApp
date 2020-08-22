@@ -12,15 +12,15 @@ class User(db.Model):
     # __table_args__ = tuple(db.UniqueConstraint('id', 'username', name='my_2uniq'))
 
     id = db.Column(db.Integer(), primary_key=True)
-    #api_key = db.Column(db.String())
+    api_key = db.Column(db.String())
     username = db.Column(db.String(), unique=True)
     firstname = db.Column(db.String())
     lastname = db.Column(db.String())
     password = db.Column(db.String())
     email = db.Column(db.String())
 
-    def __init__(self, firstname, lastname, email, password, username):
-        #self.api_key = api_key
+    def __init__(self, api_key, firstname, lastname, email, password, username):
+        self.api_key = api_key
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
@@ -38,5 +38,5 @@ class User(db.Model):
             'lastname': self.lastname,
             'password': self.password,
             'email': self.email,
-            #'api_key': self.api_key,
+            'api_key': self.api_key
         }    

@@ -28,8 +28,13 @@ class Register(Resource):
         # check if username, email exists
         # create api key
 
+        api_key = self.generate_key()
+        user = User.query.filter_by(api_key=api_key).first()
+        if user:
+            return {'message': 'API key already exists'}, 400    
+
         user = User(
-            #api_key = api_key,
+            api_key = api_key,
             firstname = json_data['firstname'],
             lastname = json_data['lastname'],
             email = json_data['email'],
@@ -44,3 +49,7 @@ class Register(Resource):
         result = User.serialize(user)
 
         return { "status": 'success', 'data': result }, 201
+
+    def generate_key(self):
+        return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(50))     #number of characters in an api key
+
