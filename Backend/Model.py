@@ -40,3 +40,37 @@ class User(db.Model):
             'email': self.email,
             'api_key': self.api_key
         }    
+
+class Task(db.Model):
+    __tablename__ = 'tasks'
+    # __table_args__ = tuple(db.UniqueConstraint('id', 'username', name='my_2uniq'))
+
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
+    note = db.Column(db.String())
+    completed = db.Column(db.Boolean(), default=False, nullable=False)
+    repeat = db.Column(db.String())
+    deadline = db.Column(db.String())
+    reminder = db.Column(db.String())
+
+    def __init__(self, user_id, note, completed, repeat, deadline, reminder):
+        self.user_id = user_id
+        self.note = note
+        self.completed = completed
+        self.repeat = repeat
+        self.deadline = deadline
+        self.reminder = reminder
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
+    def serialize(self):
+        return {
+            'user_id': self.user_id,
+            'note': self.note,
+            'repeat': self.repeat,
+            'completed': self.completed,
+            'reminder': self.reminder,
+            'deadline': self.deadline,
+            'id': self.id
+        }            

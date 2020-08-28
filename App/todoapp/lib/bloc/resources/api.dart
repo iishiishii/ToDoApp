@@ -32,9 +32,10 @@ class ApiProvider {
     }
   }
 
-  Future signinUser(String username, String password) async {
+  Future signinUser(String username, String password, String apiKey) async {
     print("entered");
     final response = await client.post("http://10.0.2.2:5000/api/signin",
+        headers: {'Authorization': apiKey},
         body: jsonEncode({
           "username": username,
           "password": password,

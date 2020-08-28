@@ -10,6 +10,6 @@ class Repository {
       moviesApiProvider.registerUser(
           username, firstname, lastname, password, email);
 
-  Future<User> signinUser(String username, String password) =>
-      moviesApiProvider.signinUser(username, password);
+  Future signinUser(String username, String password, String apiKey) =>
+      moviesApiProvider.signinUser(username, password, apiKey);
 }

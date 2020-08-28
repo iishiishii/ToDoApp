@@ -99,8 +99,9 @@ class _LoginPageState extends State<LoginPage> {
                       if (usernameText.text != null ||
                           passwordText.text != null) {
                         bloc
-                            .signinUser(usernameText.text, passwordText.text)
-                            .then(() {
+                            .signinUser(
+                                usernameText.text, passwordText.text, '')
+                            .then((_) {
                           widget.login();
                         });
                       }
