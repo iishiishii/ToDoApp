@@ -52,3 +52,7 @@ Fucntion:
     - find out how to make an api apiKey
     - create method prioritizing tasks
     - how to safely store user data
+
+ check if there is an api key saved?
+ check if the user is alrd logged in?
+ if logged in then show appif not loggin show login/signup   
