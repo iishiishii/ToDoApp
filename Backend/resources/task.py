@@ -19,6 +19,7 @@ class Tasks(Resource):
 
         if user:
             task = Task(
+                title = json_data['title'],
                 user_id = user.id,
                 note = json_data['note'],
                 completed = json_data['completed'],
