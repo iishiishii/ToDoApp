@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: darkGreyColor,
       body: Center(
         child: widget.newUser ? getSignupPage() : getSigninPage(),
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (usernameText.text != null ||
                           passwordText.text != null) {
-                        bloc
+                        userBloc
                             .signinUser(
                                 usernameText.text, passwordText.text, '')
                             .then((_) {
@@ -164,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
               if (usernameController.text != null ||
                   passwordController.text != null ||
                   emailController.text != null) {
-                bloc
+                userBloc
                     .registerUser(
                         usernameController.text,
                         '',

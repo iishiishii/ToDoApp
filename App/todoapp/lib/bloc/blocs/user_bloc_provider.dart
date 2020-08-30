@@ -7,7 +7,7 @@ class UserBloc {
   final _repository = Repository();
   final _userGetter = PublishSubject<User>();
 
-  Observable<User> get theUser => _userGetter.stream;
+  Observable<User> get getUser => _userGetter.stream;
 
   registerUser(String username, String lastname, String firstname,
       String password, String email) async {
@@ -26,4 +26,29 @@ class UserBloc {
   }
 }
 
-final bloc = UserBloc();
+class TaskBloc {
+  final _repository = Repository();
+  final _taskSubject = BehaviorSubject<List<Task>>();
+  String apiKey;
+
+  var _tasks = <Task>[];
+
+  TaskBloc(String apiKey) {
+    this.apiKey = apiKey;
+    _updateTask(apiKey).then((_) {
+      _taskSubject.add(_tasks);
+    });
+  }
+
+  Stream<List<Task>> get getTasks => _taskSubject.stream;
+
+  Future<List<Task>> _updateTask(String apiKey) async {
+    return await _repository.getUserTask(apiKey);
+  }
+
+  // dispose() {
+  //   _taskSubject.close();
+  // }
+}
+
+final userBloc = UserBloc();
