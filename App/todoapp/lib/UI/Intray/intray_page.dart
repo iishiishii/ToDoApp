@@ -5,7 +5,7 @@ import 'package:todoapp/models/global.dart';
 import 'package:todoapp/models/widget/intray_todo_widget.dart';
 
 class IntrayPage extends StatefulWidget {
-  final apiKey;
+  final String apiKey;
   IntrayPage({this.apiKey});
   @override
   _IntrayPageState createState() => _IntrayPageState();
@@ -13,11 +13,11 @@ class IntrayPage extends StatefulWidget {
 
 class _IntrayPageState extends State<IntrayPage> {
   List<Task> taskList = [];
-  TaskBloc taskBloc;
+  TaskBloc tasksBloc;
 
   @override
   void initState() {
-    taskBloc = TaskBloc(widget.apiKey);
+    tasksBloc = TaskBloc(widget.apiKey);
   }
 
   @override
@@ -31,8 +31,8 @@ class _IntrayPageState extends State<IntrayPage> {
         color: darkGreyColor,
         child: StreamBuilder(
             // Wrap our widget with a StreamBuilder
-            stream: taskBloc.getTasks, // pass our Stream getter here
-            initialData: List<Task>(), // provide an initial data
+            stream: tasksBloc.getTasks, // pass our Stream getter here
+            initialData: [], // provide an initial data
             builder: (context, snapshot) {
               taskList = snapshot.data;
               return _buildReorderableListSimple(context, taskList);

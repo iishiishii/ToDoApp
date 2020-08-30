@@ -16,34 +16,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Todo App',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: MyHomePage()
-        // home: FutureBuilder(
-        //   future: getUser(), // a previously-obtained Future<String> or null
-        //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.none &&
-        //         snapshot.hasData == null) {
-        //       //print('project snapshot data is: ${projectSnap.data}');
-        //       return Container();
-        //     }
-        //     return ListView.builder(
-        //       itemCount: snapshot.data.length,
-        //       itemBuilder: (context, index) {
-        //         return Column(
-        //           children: <Widget>[
-        //             // Widget to display the list of project
-        //           ],
-        //         );
-        //       },
-        //     );
-        //   },
-        // ),
-        );
+      debugShowCheckedModeBanner: false,
+      title: 'Todo App',
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(),
+      // home: FutureBuilder(
+      //   future: getUser(), // a previously-obtained Future<String> or null
+      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.none &&
+      //         snapshot.hasData == null) {
+      //       //print('project snapshot data is: ${projectSnap.data}');
+      //       return Container();
+      //     }
+      //     return ListView.builder(
+      //       itemCount: snapshot.data.length,
+      //       itemBuilder: (context, index) {
+      //         return Column(
+      //           children: <Widget>[
+      //             // Widget to display the list of project
+      //           ],
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
+    );
   }
 }
 

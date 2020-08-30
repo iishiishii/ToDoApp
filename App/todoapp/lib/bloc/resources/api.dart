@@ -26,7 +26,6 @@ class ApiProvider {
       // If the call to the server was successful, parse the JSON
       await saveApiKey(result["data"]["api_key"]);
       return User.fromJson(result["data"]);
-      //return User.fromJson(result['data']);
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');
@@ -34,7 +33,7 @@ class ApiProvider {
   }
 
   Future signinUser(String username, String password, String apiKey) async {
-    print("entered");
+    print("entered0");
     final response = await client.post("http://10.0.2.2:5000/api/signin",
         headers: {'Authorization': apiKey},
         body: jsonEncode({
@@ -54,25 +53,32 @@ class ApiProvider {
   }
 
   Future<List<Task>> getUserTask(String apiKey) async {
-    print("entered");
+    print("entered1");
     final response = await client.get(
       "http://10.0.2.2:5000/api/tasks",
       headers: {'Authorization': apiKey},
     );
-
+    print("entered2");
     final Map result = json.decode(response.body);
     if (response.statusCode == 201) {
       // If the call to the server was successful, parse the JSON
-      await saveApiKey(result["data"]["api_key"]);
+      //await saveApiKey(result["data"]["api_key"]);
       List<Task> task = [];
       for (Map json_ in result['data']) {
-        task.add(Task.fromJson(result["data"]));
+        try {
+          task.add(Task.fromJson(json_));
+        } catch (Exception) {
+          print(Exception);
+        }
+      }
+      for (Task _task in task) {
+        print(_task.taskId);
       }
       return task;
       //return User.fromJson(result['data']);
     } else {
       // If that call was not successful, throw an error.
-      throw Exception('Failed to load post');
+      throw Exception('Failed to load tasks');
     }
   }
 

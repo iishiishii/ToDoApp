@@ -3,15 +3,14 @@ import 'api.dart';
 import 'package:todoapp/models/classes/user.dart';
 
 class Repository {
-  final moviesApiProvider = ApiProvider();
+  final apiProvider = ApiProvider();
 
   Future<User> registerUser(String username, String lastname, String firstname,
           String password, String email) =>
-      moviesApiProvider.registerUser(
-          username, firstname, lastname, password, email);
+      apiProvider.registerUser(username, firstname, lastname, password, email);
 
   Future signinUser(String username, String password, String apiKey) =>
-      moviesApiProvider.signinUser(username, password, apiKey);
+      apiProvider.signinUser(username, password, apiKey);
 
-  Future getUserTask(String apiKey) => moviesApiProvider.getUserTask(apiKey);
+  Future getUserTask(String apiKey) => apiProvider.getUserTask(apiKey);
 }
