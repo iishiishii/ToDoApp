@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/UI/Intray/intray_page.dart';
 import 'package:todoapp/UI/Login/login_screen.dart';
+import 'package:todoapp/bloc/resources/repository.dart';
 import 'models/global.dart';
 import 'package:http/http.dart' as http;
 import 'package:todoapp/models/classes/user.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        dialogBackgroundColor: Colors.transparent,
       ),
       home: MyHomePage(),
       // home: FutureBuilder(
@@ -53,7 +55,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TaskBloc taskBloc;
   String apiKey = '';
+  Repository _repository = Repository();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -61,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           apiKey = snapshot.data;
+          taskBloc = TaskBloc(apiKey);
         } else {
           print('null');
         }
@@ -161,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: FloatingActionButton(
                     child: Icon(Icons.add, size: 70),
                     backgroundColor: redColor,
-                    onPressed: () {},
+                    onPressed: _showAddDialog,
                   ),
                 )
               ],
@@ -193,6 +199,92 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void _showAddDialog() {
+    TextEditingController taskName = new TextEditingController();
+    TextEditingController deadline = new TextEditingController();
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          content: Container(
+            padding: EdgeInsets.all(5),
+            constraints: BoxConstraints.expand(
+              height: 200,
+            ),
+            decoration: BoxDecoration(
+              color: darkGreyColor,
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text('Add new task', style: whiteTitle),
+                Container(
+                  child: TextField(
+                      controller: taskName,
+                      decoration: InputDecoration(
+                        hintText: 'Name of task',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                      )),
+                ),
+                Container(
+                  child: TextField(
+                      controller: deadline,
+                      decoration: InputDecoration(
+                        hintText: 'Deadline',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                      )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                      color: redColor,
+                      child: Text(
+                        'Cancel',
+                        style: whiteButtonTitle,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    RaisedButton(
+                      color: redColor,
+                      child: Text(
+                        'Add',
+                        style: whiteButtonTitle,
+                      ),
+                      onPressed: () {
+                        if (taskName != null) {
+                          addTask(taskName.text, deadline.text);
+                          Navigator.pop(context);
+                        }
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void addTask(String taskName, String deadline) async {
+    await _repository.addUserTask(this.apiKey, taskName, deadline);
   }
 
   logout() async {
